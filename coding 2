@@ -1,0 +1,132 @@
+class ContaBancaria:
+    def _init_(self, numero_conta, titular, saldo_inicial=0):
+        self._numero_conta = numero_conta
+        self._titular = titular
+        self._saldo = saldo_inicial
+
+    def depositar(self, valor):
+        if valor > 0:
+            self._saldo += valor
+            print(f"Depósito de R${valor:.2f} realizado com sucesso!")
+        else:
+            print("Valor inválido para depósito.")
+
+    def sacar(self, valor):
+        if 0 < valor <= self._saldo:
+            self._saldo -= valor
+            print(f"Saque de R${valor:.2f} realizado com sucesso!")
+        else:
+            print("Saldo insuficiente ou valor inválido.")
+
+    def consultar_saldo(self):
+        return f"Saldo atual: R${self._saldo:.2f}"
+
+# Testes
+conta = ContaBancaria(12345, "João Silva", 1000)
+print(conta.consultar_saldo())
+conta.depositar(500)
+print(conta.consultar_saldo())
+conta.sacar(300)
+print(conta.consultar_saldo())
+
+
+
+
+from abc import ABC, abstractmethod
+
+class Veiculo(ABC):
+    def _init_(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+        self.velocidade = 0
+
+    @abstractmethod
+    def acelerar(self):
+        pass
+
+    @abstractmethod
+    def frear(self):
+        pass
+
+    @abstractmethod
+    def mostrar_velocidade(self):
+        pass
+
+
+
+class Carro(Veiculo):
+    def acelerar(self):
+        self.velocidade += 10
+
+    def frear(self):
+        self.velocidade = max(0, self.velocidade - 10)
+
+    def mostrar_velocidade(self):
+        print(f"A velocidade do carro é {self.velocidade} km/h.")
+
+class Moto(Veiculo):
+    def acelerar(self):
+        self.velocidade += 15
+
+    def frear(self):
+        self.velocidade = max(0, self.velocidade - 10)
+
+    def mostrar_velocidade(self):
+        print(f"A velocidade da moto é {self.velocidade} km/h.")
+
+# Testes
+carro = Carro("Ford", "Fiesta")
+carro.acelerar()
+carro.mostrar_velocidade()
+
+moto = Moto("Honda", "CB500")
+moto.acelerar()
+moto.mostrar_velocidade()
+
+
+
+def teste_veiculo(veiculo):
+    veiculo.acelerar()
+    veiculo.acelerar()
+    veiculo.mostrar_velocidade()
+    veiculo.frear()
+    veiculo.mostrar_velocidade()
+
+# Testes
+carro = Carro("Ford", "Fiesta")
+moto = Moto("Honda", "CB500")
+
+teste_veiculo(carro)
+teste_veiculo(moto)
+
+
+
+
+class Motor:
+    def _init_(self, potencia):
+        self.potencia = potencia
+
+class CarroComMotor(Carro):
+    def _init_(self, marca, modelo, potencia_motor):
+        super()._init_(marca, modelo)
+        self.motor = Motor(potencia_motor)
+
+    def mostrar_potencia_motor(self):
+        print(f"A potência do motor é {self.motor.potencia} CV.")
+
+# Testes
+carro_com_motor = CarroComMotor("Ford", "Fiesta", 120)
+carro_com_motor.mostrar_potencia_motor()
+carro_com_motor.acelerar()
+carro_com_motor.mostrar_velocidade()
+
+
+
+
+/encapsulamento/script.py
+/abstracao/script.py
+/heranca/script.py
+/polimorfismo/script.py
+/composicao/script.py
+
+
